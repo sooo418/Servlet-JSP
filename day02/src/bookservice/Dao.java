@@ -32,6 +32,7 @@ public class Dao {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		} finally {
 			JDBCUtil.close(con, ps, rs);
 
@@ -62,8 +63,10 @@ public class Dao {
 			System.out.println("등록데이터확인필요");
 			System.out.println(e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			System.out.println(e.getMessage());
+			throw(e);
+			
 		} finally {
 			JDBCUtil.close(con, ps, rs);
 

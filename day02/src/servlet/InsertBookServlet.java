@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,9 +38,14 @@ public class InsertBookServlet extends HttpServlet {
 		
 		try {
 			int i = service.addBook(user);
-			out.print("<h1>" + i +"개의 row 입력 완료");
+			response.sendRedirect("list.do");
+			//out.print("<h1>" + i +"개의 row 입력 완료");
 		} catch (Exception e) {
-			out.print("<h2> 오류: "+ e);
+			request.setAttribute("exception", e);
+			
+			getServletContext().
+			getRequestDispatcher("/error.jsp").
+			forward(request, response);
 		}
 	}
 
