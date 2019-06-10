@@ -7,16 +7,6 @@
 <title>login</title>
 </head>
 <body>
-	<%
-	HttpSession HttpSession = request.getSession();
-	String id = (String)HttpSession.getAttribute("id");
-	String pw = (String)HttpSession.getAttribute("pw");
-	
-	if (!(id == null) && id.equals("scott") && !(pw == null) && pw.equals("!aA1"))
-		out.println("<script>alert('이미 로그인 되어있습니다'); location.href='./index.jsp';</script>");
-	else{
-		
-	%>
 	<h2>로그인 폼</h2>
 	<form id="form1" name="form1" action="login.do" method="post" >
 		<table border="1">
@@ -49,8 +39,5 @@
 			</td>
 		</table>
 	</form>
-	<% 
-	}
-	%>
 </body>
 </html>

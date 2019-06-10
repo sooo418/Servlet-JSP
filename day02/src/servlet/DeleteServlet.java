@@ -2,51 +2,44 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bookservice.Book;
 import bookservice.BookService;
 import bookservice.BookServiceImpl;
 import bookservice.Dao;
 
-@WebServlet({ "/InsertBookServlet", "/book.do" })
-public class InsertBookServlet extends HttpServlet {
+@WebServlet({ "/DeleteServlet", "/delete.do" })
+public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, 
 			HttpServletResponse response) 
 					throws ServletException, IOException {
-
+		int count = 0;
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		String title = request.getParameter("title");
-		String author = request.getParameter("author");
-		int price = Integer.parseInt(request.getParameter("price"));
-		String pubdate = request.getParameter("pubdate");
-		
+		String[] check = request.getParameterValues("check");
 		Dao dao = new Dao();
 		BookService service = new BookServiceImpl(dao);
-		Book user = new Book(title, author, price, pubdate);
 		
-		try {
-			int i = service.addBook(user);
-			response.sendRedirect("list.do");
-			//out.print("<h1>" + i +"개의 row 입력 완료");
-		} catch (Exception e) {
-			request.setAttribute("exception", e);
-			
-			getServletContext().
-			getRequestDispatcher("/error.jsp").
-			forward(request, response);
+		if(check == null)
+			out.println("<script>alert('선택된 개체가 없습니다.'); location.href='./bookList2.jsp'; </script>");
+		for(int i = 0; i < check.length; i++) {
+			try {
+				service.deleteBook(check[i]);
+				count++;
+			} catch (Exception e) {
+				
+			} finally {
+				out.println("<script>alert('개체를 " + count + "개 삭제하였습니다.'); location.href='./bookList2.jsp'; </script>");
+			}
 		}
 	}
 

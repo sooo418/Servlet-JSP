@@ -73,4 +73,26 @@ public class Dao {
 		}
 		return row;
 	}
+	public int deleteBook(String title) throws Exception {
+		String sql = "delete from book where title= ?";
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int row = 0;
+		
+		try {
+			con = JDBCUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, title);
+			
+			row = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			throw(e);
+			
+		}
+		
+		return row;
+	}
 }

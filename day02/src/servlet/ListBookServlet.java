@@ -29,8 +29,10 @@ public class ListBookServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
 		String pw = (String)session.getAttribute("pw");
-		
-		if(id.equals("scott") && pw.equals("!aA1")) {
+		if(id==null) {
+			out.println("<script>alert('도서목록을 보려면 로그인을 해주세요.'); location.href='./login.jsp'; </script>");
+		}
+		else if(id.equals("scott") && pw.equals("!aA1")) {
 			Dao dao = new Dao();
 			BookService service = new BookServiceImpl(dao);
 			List<Book> list = service.bookList();

@@ -1,14 +1,18 @@
 @charset "UTF-8";
 
 table {
+	width: 800px;
 	margin: 0 auto;
-	border: 2px solid purple;
+	border: 2px solid black;
 	border-collapse: collapse;
 }
 
 th {
-	background-color: green;
-	color: purple;
+	background-color: black;
+	color: white;
+}
+td{
+	text-align: center;
 }
 
 .tablea tr:nth-child(2n) {

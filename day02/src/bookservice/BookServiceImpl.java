@@ -33,4 +33,10 @@ public class BookServiceImpl implements BookService{
 
 		return dao.addBook(vo);
 	}
+
+	@Override
+	public int deleteBook(String title) throws Exception {
+		return dao.deleteBook(title);
+	}
+	
 }

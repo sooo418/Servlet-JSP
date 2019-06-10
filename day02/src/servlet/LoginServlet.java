@@ -10,14 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/login.do")
+@WebServlet({"/login.do","/logout.do"})
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
@@ -51,4 +46,14 @@ public class LoginServlet extends HttpServlet {
 		
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		HttpSession HttpSession = request.getSession();
+		HttpSession.invalidate();
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('로그아웃 되었습니다.'); location.href='./index.jsp';</script>");
+		
+	}
 }
