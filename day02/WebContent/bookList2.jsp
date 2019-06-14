@@ -22,7 +22,9 @@
 		<table>
 			<tr>
 				<th>북번호</th><th>Title</th><th>Author</th>
-				<th>Price</th><th>Pubdate</th><th><input type="submit" value="삭제"></th>
+				<th>Price</th><th>Pubdate</th>
+				<th><input type="submit" value="삭제" 
+				onclick="return confirm('정말 삭제하시겠습니까?')"></th>
 			</tr>
 	<%//자바코드를 넣을 수 있다.
 	Dao dao = new Dao();
